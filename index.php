@@ -2,8 +2,9 @@
 
 /* Load required lib files. */
 session_start();
-require_once('twitteroauth/twitteroauth.php');
-require_once('config.php');
+require_once('twitteroauth/twitteroauth.php'); //OAuth Library
+require_once('config.php'); //Environment variables for OAuth
+require_once('stopWords.php'); //Common junk words. List from http://norm.al/2009/04/14/list-of-english-stop-words/
 
 /* If redirect is requested, redirect to twitter to start OAuth process */
 if(isset($_GET['redirect']) && $_GET['redirect']==1)	{
@@ -50,8 +51,10 @@ else	{
 		$words = preg_split('/((^\p{P}+)|(\p{P}*\s+\p{P}*)|(\p{P}+$))/', $status->text, -1, PREG_SPLIT_NO_EMPTY);
 		
 		foreach($words as $word)	{
-			if(isset($wordCounts[$word])) $wordCounts[$word]++;
-			else $wordCounts[$word] = 1;
+			if(!in_array($word, $stopwords))	{
+				if(isset($wordCounts[$word])) $wordCounts[$word]++;
+				else $wordCounts[$word] = 1;
+			}
 		}
 	}
 	
