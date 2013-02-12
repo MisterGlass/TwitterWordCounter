@@ -1,0 +1,10 @@
+Simple PHP script that interacts with twitters OAuth API and parses their recent tweets for statistics.
+
+Uses Twitter OAuth PHP library by Abraham Williams https://github.com/abraham/twitteroauth
+
+
+Details:
+This PHP script will establish an OAuth connection for the user, grab their latest 200 tweets (current limit of the statuses/user_timeline API), and parse through them to build a list of what words the user used and how often. It was created mostly out of boredom.
+
+Instruction:
+Grab files. Copy config.php.dist file to config.php and replace with your API credentials & URL. Profit.
